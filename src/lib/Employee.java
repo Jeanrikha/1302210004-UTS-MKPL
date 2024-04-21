@@ -13,13 +13,13 @@ public class Employee {
 	private String idNumber;
 	private String address;
 	
-	private int yearJoined;
-	private int monthJoined;
-	private int dayJoined;
+	private int joinYear;
+	private int joinMonth;
+	private int joinDay;
 	private int monthWorkingInYear;
 	
-	private boolean isForeigner;
-	private Gender gender; //true = Laki-laki, false = Perempuan
+	private boolean isForeignEmployee;
+	private Gender employeeGender; //true = Laki-laki, false = Perempuan
 	
 	private int monthlySalary;
 	private int otherMonthlyIncome;
@@ -36,17 +36,17 @@ public class Employee {
 	private static final int GRADE_3 = 3;
 	private static final int GRADE_SALARY_INCREASE_PERCENTAGE = 50;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, Gender gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int joinYear, int joinMonth, int joinDay, boolean isForeignEmployee, Gender employeeGender) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
-		this.isForeigner = isForeigner;
-		this.gender = gender;
+		this.joinYear = joinYear;
+		this.joinMonth = joinMonth;
+		this.joinDay = joinDay;
+		this.isForeignEmployee = isForeignEmployee;
+		this.employeeGender = employeeGender;
 		
 		childNames = new LinkedList<String>();
 		childIdNumbers = new LinkedList<String>();
@@ -67,7 +67,7 @@ public class Employee {
 			baseSalary =700000;
 		}
 
-		monthlySalary = isForeigner ? (int) (baseSalary * (1 + GRADE_SALARY_INCREASE_PERCENTAGE / 100.0)) : baseSalary;
+		monthlySalary = isForeignEmployee ? (int) (baseSalary * (1 + GRADE_SALARY_INCREASE_PERCENTAGE / 100.0)) : baseSalary;
 	}
 	
 	public void setAnnualDeductible(int deductible) {	
@@ -93,8 +93,8 @@ public class Employee {
 		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 		
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		if (date.getYear() == joinYear) {
+			monthWorkingInYear = date.getMonthValue() - joinMonth;
 		}else {
 			monthWorkingInYear = 12;
 		}
