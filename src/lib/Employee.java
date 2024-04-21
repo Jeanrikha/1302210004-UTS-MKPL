@@ -30,6 +30,11 @@ public class Employee {
 
 	private List<String> childNames;
 	private List<String> childIdNumbers;
+
+	private static final int GRADE_1 = 1;
+	private static final int GRADE_2 = 2;
+	private static final int GRADE_3 = 3;
+	private static final int GRADE_SALARY_INCREASE_PERCENTAGE = 50;
 	
 	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
 		this.employeeId = employeeId;
@@ -53,22 +58,16 @@ public class Employee {
 	 */
 	
 	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
+		int baseSalary = 0;
+		if (grade == GRADE_1){
+			baseSalary = 3000000;
+		} else if (grade == GRADE_2){
+			baseSalary = 500000;
+		} else if (grade == GRADE_3){
+			baseSalary =700000;
 		}
+
+		monthlySalary = isForeigner ? (int) (baseSalary * (1 + GRADE_SALARY_INCREASE_PERCENTAGE / 100.0)) : baseSalary;
 	}
 	
 	public void setAnnualDeductible(int deductible) {	
